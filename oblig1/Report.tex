@@ -1,0 +1,32 @@
+\documentclass[11pt,a4paper]{report}
+
+\begin{document}
+
+
+Exercise 1
+
+a) We have $u'(0) \approx \frac{u^1-u^{-1}}{2\Delta t} $ with initial condition $u'(0)=V$, we get following expression for $u^{-1}$: $$u^{-1} = u^1 -2\Delta t V$$ Then we set this expression into $[D_t D_t u + \omega^2 u =f]^0 $. This gives us: $$ \frac{u^1-2u^0+u^{-1}}{\Delta t^2} + \omega^2u^0 = f(0) \iff u^1 = \frac{1}{2}(u^0(2 - (\Delta t \omega)^2) + \Delta t^2f(0) +  2V\Delta t)$$
+
+
+b) Let $u(t)=ct+d$. $$u(0)=I, u'(0)=V \Rightarrow d=I, c=V$$ Then I calculate descrete doubble derivative of u by term: $$c[D_t D_t t]^n = c\frac{n+\Delta t - 2n + n -\Delta t}{ \Delta t^2}= 0$$ For the constant term: $$ [D_t D_t d]^n = \frac{d - 2d + d }{ \Delta t^2}= 0$$ We are also asked to calculate sorce term. We know $u''(t)=0$. When we put u into our equation we therefore get $$f(t)=u''(t)+\omega^2u(t) = \omega^2u(t) = \omega^2(Vt+I)$$ If we use this f, we see that $u(t)=ct+d$ solves $[D_t D_t u + \omega^2 u =f]^n $
+\\
+c) Everything in code.
+\\
+d) Everything in code, notice that I make an additional symbolic variable b that is the coefficient of $x^2$, sine this is not determined by the ODE. 
+
+e) I check make a function cubic in code, and use the symbolic functions to check if cubic polynomial solves discrete equation. The rusult is that the cubic polynomial gives zero residual on $[D_t D_t u + \omega^2 u =f]^n$, but on the initial condition we get a residual $r=2a$, where $a$ is the coefficient to $x^3$. This means that cubic polynomial does not solve discrete equation.
+\\
+f and g explained in code.
+
+
+
+    
+Exercise 21
+
+a)Everything in code.
+b)Everything in code.
+c)We want an equation that is vertical only. This means $x(t)=0$. This gives us the equation : $$y''=-\frac{\beta}{1-\beta}(1-\frac{\beta}{|y-1|})(y-1)-\beta $$ If we assume $y<1$ we get:
+$$y''=-\frac{\beta}{1-\beta}(y-1+\beta)-\beta= -\frac{\beta}{1-\beta}y$$ This gives us equation exercise was asking for. For initial conditions, we see: $$x(0)=0 \Rightarrow \Theta = 0 \Rightarrow y(0)=1-(\epsilon +1)cos(\Theta)=-\epsilon$$ This means that the exact solution to the vertical motion is $$y(t)=-\epsilon \cos(\sqrt{\frac{\beta}{1-\beta}}t)$$ With requirement $|\epsilon|<1$. Rest of exercise is in code.
+d)Everything in code.
+
+\end{document}
