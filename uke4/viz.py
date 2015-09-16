@@ -8,7 +8,7 @@ def viz(
     solver_function=solver,   # Function with numerical algorithm
     ):
     """Run solver and visualize u at each time level."""
-
+    sleep=0.001
     def plot_u_st(u, x, t, n):
         """user_action function for solver."""
         plt.plot(x, u, 'r-',
@@ -17,7 +17,7 @@ def viz(
                  title='t=%f' % t[n], show=True)
         # Let the initial condition stay on the screen for 2
         # seconds, else insert a pause of 0.2 s between each plot
-        time.sleep(2) if t[n] == 0 else time.sleep(0.2)
+        time.sleep(2) if t[n] == 0 else time.sleep(sleep)
         plt.savefig('frame_%04d.png' % n)  # for movie making
 
     class PlotMatplotlib:
@@ -33,7 +33,7 @@ def viz(
                 self.lines[0].set_ydata(u)
                 plt.legend(['t=%f' % t[n]], loc='lower left')
                 plt.draw()
-            time.sleep(2) if t[n] == 0 else time.sleep(0.2)
+            time.sleep(2) if t[n] == 0 else time.sleep(sleep)
             plt.savefig('tmp_%04d.png' % n)  # for movie making
 
     if tool == 'matplotlib':
