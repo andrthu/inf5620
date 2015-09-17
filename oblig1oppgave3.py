@@ -1,3 +1,9 @@
+
+
+
+
+
+
 from numpy import *
 
 #dimensjon til matrise
