@@ -12,7 +12,7 @@ def viz(
     disc='type57'
     ):
     """Run solver and visualize u at each time level."""
-    sleep=0.02
+    sleep=0.002
     def plot_u_st(u, x, t, n):
         """user_action function for solver."""
         plt.plot(x, u, 'r-',

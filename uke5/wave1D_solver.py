@@ -75,7 +75,7 @@ def solver(I, V,f, q, L, dt, C, T, max_q,
             K0=2*q(0)*(u_1[1]-u_1[0])  
             KN=2*q(dx*Nx)*(u_1[Nx-1]-u_1[Nx])
 
-        print dt**2*f(x[0], t[n])
+        
         u[0] = - u_2[0] + 2*u_1[0] + C3*K0 + dt**2*f(x[0], t[n])
         u[Nx] = - u_2[Nx] + 2*u_1[Nx] + C3*KN + dt**2*f(x[Nx], t[n])
         if user_action is not None:
@@ -109,21 +109,71 @@ def make_f(q,d_q,dd_q,L):
     
     return lambda x,t: u_tt(x,t) - d_q(x)*u_x(x,t)-q(x)*u_xx(x,t),ue
 
+def make_f2(q,d_q,dd_q,omega,d_omega,dd_omega,L):
+    
+    
+
+    ue = lambda x,t: cos(pi*x/L)*cos(t*omega(x))
+    help1_f = lambda x,t: sin(pi*x/L)*cos(t*omega(x))
+    help2_f = lambda x,t: cos(pi*x/L)*sin(t*omega(x))
+    help3_f = lambda x,t: sin(pi*x/L)*sin(t*omega(x))
+
+    u_tt = lambda x,t: -ue(x,t)*omega(x)**2
+
+    u_x = lambda x,t: -pi*help1_f(x,t)/L - t*d_omega(x)*help2_f(x,t)/L
+    u_xx1 = lambda x,t: -ue(x,t)*((pi/L)**2 + (t*d_omega(x))**2)
+    u_xx2 = lambda x,t: help3_f(x,t)*2*t*pi*d_omega(x)/L
+    u_xx3 = lambda x,t: -t*dd_omega(x)*help2_f(x,t)
+    u_xx = lambda x,t: u_xx1(x,t)+u_xx2(x,t)+u_xx3(x,t)
+    
+    return lambda x,t: u_tt(x,t) - d_q(x)*u_x(x,t)-q(x)*u_xx(x,t),ue
+
 
 if __name__ == "__main__":
     
-    L=1
-    C=1.1
-    T=2
+    L=2
+    C=0.5
+    T=3
     dt=0.01
     I = lambda x: cos(pi*x/L)
+    K=pi/L
     disc='type57'
 
     q = lambda x: 1+ (x-L/2.)**4
     d_q= lambda x: 4*(x-L/2.)**3
     dd_q=lambda x: 12*(x-L/2.)**2
     max_q = q(0)
+   
+    #f = lambda x,t: u_tt(x,t) - d_q(x)*u_x(x,t)-q(x)*u_xx(x,t)
+    f,ue=make_f(q,d_q,dd_q,L)
+    
+    """
+    viz(I,None,f, q,L,dt,C,T,ue,max_q,
+        -2,2,True,'matplotlib',solver,False,disc)
+    """
 
+    q = lambda x: cos(x*K)**2
+    d_q= lambda x: -2*K*cos(x*K)*sin(x*K)
+    dd_q=lambda x: 2*(sin(K*x)**2-cos(K*x)**2)*K**2
+    max_q = 1
+    
+    o = lambda x: K*cos(K*x)
+    d_o = lambda x: -sin(K*x)*K**2
+    dd_o = lambda x: -cos(K*x)*K**3
+    f,ue=make_f2(q,d_q,dd_q,o,d_o,dd_o,L)
+
+    viz(I,None,f, q,L,dt,C,T,ue,max_q,
+        -2,2,True,'matplotlib',solver,False,disc)
+    
+"""
+    I, V, f, c, L, dt, C, T, ue, max_q,
+    umin, umax,               
+    animate=True,             
+    tool='matplotlib',        
+    solver_function=solver,   
+    )
+"""
+"""
     omega = lambda x: sqrt(q(x))*pi/L
     d_omega = lambda x: pi*d_q(x)/(2.*L*sqrt(q(x)))
     dd_omega = lambda x: dd_q(x)*d_omega(x)-(pi*d_q(x)**2)/(4*L*sqrt(q(x))**3)
@@ -141,28 +191,4 @@ if __name__ == "__main__":
     u_xx2 = lambda x,t: help3_f(x,t)*2*t*pi*d_omega(x)/L
     u_xx3 = lambda x,t: -t*dd_omega(x)*help2_f(x,t)
     u_xx = lambda x,t: u_xx1(x,t)+u_xx2(x,t)+u_xx3(x,t)
-
-    #f = lambda x,t: u_tt(x,t) - d_q(x)*u_x(x,t)-q(x)*u_xx(x,t)
-    f,ue=make_f(q,d_q,dd_q,L)
-    
-    """
-    viz(I,None,f, q,L,dt,C,T,ue,max_q,
-        -2,2,True,'matplotlib',solver,False,disc)
-    """
-    q = lambda x: (cos(pi*x/L))**2 +1
-    d_q= lambda x: -pi*sin(2*pi*x/L)/L
-    dd_q=lambda x: -2*cos(2*pi*x/L)*(pi/L)**2
-    max_q = q(0)
-    f,ue=make_f(q,d_q,dd_q,L)
-
-    viz(I,None,f, q,L,dt,C,T,ue,max_q,
-        -2,2,True,'matplotlib',solver,False,disc)
-    
-"""
-    I, V, f, c, L, dt, C, T, ue, max_q,
-    umin, umax,               
-    animate=True,             
-    tool='matplotlib',        
-    solver_function=solver,   
-    )
 """
