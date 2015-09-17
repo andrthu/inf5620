@@ -75,7 +75,7 @@ def solver(I, V,f, q, L, dt, C, T, max_q,
             K0=2*q(0)*(u_1[1]-u_1[0])  
             KN=2*q(dx*Nx)*(u_1[Nx-1]-u_1[Nx])
 
-        print dt**2*f(x[0], t[n])
+        
         u[0] = - u_2[0] + 2*u_1[0] + C3*K0 + dt**2*f(x[0], t[n])
         u[Nx] = - u_2[Nx] + 2*u_1[Nx] + C3*KN + dt**2*f(x[Nx], t[n])
         if user_action is not None:
@@ -113,7 +113,7 @@ def make_f(q,d_q,dd_q,L):
 if __name__ == "__main__":
     
     L=1
-    C=1.1
+    C=2
     T=2
     dt=0.01
     I = lambda x: cos(pi*x/L)
@@ -149,7 +149,7 @@ if __name__ == "__main__":
     viz(I,None,f, q,L,dt,C,T,ue,max_q,
         -2,2,True,'matplotlib',solver,False,disc)
     """
-    q = lambda x: (cos(pi*x/L))**2 +1
+    q = lambda x: (cos(pi*x/L))**2
     d_q= lambda x: -pi*sin(2*pi*x/L)/L
     dd_q=lambda x: -2*cos(2*pi*x/L)*(pi/L)**2
     max_q = q(0)
