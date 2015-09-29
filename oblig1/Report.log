@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2015.9.6)  6 SEP 2015 19:55
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2015.9.6)  26 SEP 2015 21:49
 entering extended mode
  %&-line parsing enabled.
 **Report.tex
@@ -45,13 +45,13 @@ LaTeX Font Info:    ... okay on input line 3.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 6.
+(Font)              <10.95> on input line 8.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 6.
+(Font)              <8> on input line 8.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 6.
+(Font)              <6> on input line 8.
 
-Overfull \hbox (5.03545pt too wide) detected at line 6
+Overfull \hbox (5.03545pt too wide) detected at line 8
 [] \OT1/cmr/m/n/10.95 + \OML/cmm/m/it/10.95 ![]u[] \OT1/cmr/m/n/10.95 = \OML/cm
 m/m/it/10.95 f\OT1/cmr/m/n/10.95 (0)  \OMS/cmsy/m/n/10.95 ([])  \OML/cmm/m/it/1
 0.95 u[] \OT1/cmr/m/n/10.95 = [](\OML/cmm/m/it/10.95 u[]\OT1/cmr/m/n/10.95 (2 \
