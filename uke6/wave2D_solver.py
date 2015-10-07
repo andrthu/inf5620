@@ -8,15 +8,21 @@ def solver(I,V,f,q,b,Lx,Ly,dt,T,C):
     dx = dt/C 
     Nx = int(round(Lx/dx))
     x = np.linspace(0, Nx*dx, Nx+1)
-
+    xv = x[:newaxis]
+    
     dy = dt/C 
     Ny = int(round(Ly/dy))
     y = np.linspace(0, Ny*dx, Ny+1)
+    yv = y[newaxis:]
 
     C1 = (dt/dx)**2
     C2 = (dt/dy)**2
-   
     
+    F = np.zeros(shape=(Nx,Ny))
+    Q = np.zeros(shape=(Nx,Ny))
+    V_v = np.zeros(shape=(Nx,Ny))
+    I_v = np.zeros(shape=(Nx,Ny))
+
     u = np.zeros(shape=(Nx,Ny))
     u_1 = np.zeros(shape=(Nx,Ny))
     u_2 = np.zeros(shape=(Nx,Ny))
@@ -27,6 +33,12 @@ def solver(I,V,f,q,b,Lx,Ly,dt,T,C):
     if V is None or V == 0:
         V = lambda x,y: 0
 
+    #making variabels to make vectorization easier.
+    
+    F[:,:] = f(xv[:],yv[:],0)
+    Q[:,:] = q(xv[:],yv[:])
+    V_v[:,:] = V(xv[:],yv[:])
+        
     
     #The first initial condition
     for i in range(1,Nx):
