@@ -1,6 +1,7 @@
 import numpy as np
+import vectorization as vec 
 
-def solver(I,V,f,q,b,Lx,Ly,dt,T,C):
+def solver(I,V,f,q,b,Lx,Ly,dt,T,C,mode='scalar',bug=None):
     
     Nt = int(round(T/dt))
     t = np.linspace(0, Nt*dt, Nt+1)
@@ -8,20 +9,17 @@ def solver(I,V,f,q,b,Lx,Ly,dt,T,C):
     dx = dt/C 
     Nx = int(round(Lx/dx))
     x = np.linspace(0, Nx*dx, Nx+1)
-    xv = x[:newaxis]
+    xv = x[:np.newaxis]
     
     dy = dt/C 
     Ny = int(round(Ly/dy))
     y = np.linspace(0, Ny*dx, Ny+1)
-    yv = y[newaxis:]
+    yv = y[np.newaxis:]
 
     C1 = (dt/dx)**2
     C2 = (dt/dy)**2
     
-    F = np.zeros(shape=(Nx,Ny))
-    Q = np.zeros(shape=(Nx,Ny))
-    V_v = np.zeros(shape=(Nx,Ny))
-    I_v = np.zeros(shape=(Nx,Ny))
+    
 
     u = np.zeros(shape=(Nx,Ny))
     u_1 = np.zeros(shape=(Nx,Ny))
@@ -33,50 +31,91 @@ def solver(I,V,f,q,b,Lx,Ly,dt,T,C):
     if V is None or V == 0:
         V = lambda x,y: 0
 
-    #making variabels to make vectorization easier.
     
-    F[:,:] = f(xv[:],yv[:],0)
-    Q[:,:] = q(xv[:],yv[:])
-    V_v[:,:] = V(xv[:],yv[:])
+    
+    
+      
+    if mode=='scalar':
+        #The first initial condition
+        for i in range(Nx):
+            for j in range(Ny):
+                u_1[i,j]=I(dx*i,dy*j)
         
-    
-    #The first initial condition
-    for i in range(1,Nx):
-        for j in range(1,Ny):
-            u_1[i,j]=I(dx*i,dy*j)
+                
+        ### BUG ### Making a bug for exercise 3,1,4
+        if bug=='bug1':
+            u_1 = np.zeros(shape=(Nx,Ny))
+            for i in range(1,Nx):
+                for j in range(1,Ny):
+                    u_1[i,j]=I(dx*i,dy*j)
+        
+        
+        #The second initial condiyion at inner points
+        for i in range(1,Nx-1):
+            for j in range(1,Ny-1):
+                u[i,j] = step1(u_1,x,y,t,f,V,C1,C2,dt,i,j,b,q)
 
-    #The second initial condiyion at inner points
-    for i in range(1,Nx-1):
-        for j in range(1,Ny-1):
-            u[i,j] = step1(u_1,x,y,t,f,V,C1,C2,dt,i,j,b,q)
-            
+        ### BUG ### Making a bug for exercise 3,1,4
+        if bug=='bug2':
+            from constructed_bugs import bug_2
+            for i in range(1,Nx-1):
+                for j in range(1,Ny-1):
+                    u[i,j] = bug_2(u_1,x,y,t,f,V,C1,C2,dt,i,j,b,q)
 
-    #Neumann condition at the bouandary
-    u[0,0] = u[1,1]
-    u[0,Ny-1] = u[1,Ny-2]
-    u[Nx-1,0] = u[Nx-2,1]
-    u[Nx-1,Ny-1] = u[Nx-2,Ny-2]
+        ### BUG ### Making a bug for exercise 3,1,4
+        if bug=='bug3':
+            from constructed_bugs import bug_3
+            for i in range(1,Nx-1):
+                for j in range(1,Ny-1):
+                    u[i,j] = bug_3(u_1,x,y,t,f,V,C1,C2,dt,i,j,b,q)
+
+        ### BUG ### Making a bug for exercise 3,1,4
+        if bug=='bug4':
+            from constructed_bugs import bug_4
+            for i in range(1,Nx-1):
+                for j in range(1,Ny-1):
+                    u[i,j] = bug_4(u_1,x,y,t,f,V,C1,C2,dt,i,j,b,q)
+
+        #Neumann condition at the bouandary
+        u[0,0] = u_1[1,1]
+        u[0,Ny-1] =u_1[1,Ny-2]
+        u[Nx-1,0] = u_1[Nx-2,1]
+        u[Nx-1,Ny-1] = u_1[Nx-2,Ny-2]
     
-    #Neumann for the half the bouandary
-    for i in range(1,Nx-1):
-        u[i,0],u[i,Ny-1] = step1_neuman_y(u_1,x,y,t,f,V,C1,C2,dt,i,Ny,b,q)
+        #Neumann for the half the bouandary
+        for i in range(1,Nx-1):
            
-    #Neumann for the other half of the bouandary 
-    for j in range(1,Ny-1):
-        u[0,j],u[Nx-1,j] = step1_neuman_x(u_1,x,y,t,f,V,C1,C2,dt,j,Nx,b,q)
-    
-    #fixing u_1 and u_2 for next timestep.
-    for i in range(Nx):
+            u[i,0],u[i,Ny-1] = step1_neuman_y(u_1,x,y,t,f,V,C1,C2,dt,i,Ny,b,q)
+            
+        #Neumann for the other half of the bouandary 
+        for j in range(1,Ny-1):
+            
+            u[0,j],u[Nx-1,j] = step1_neuman_x(u_1,x,y,t,f,V,C1,C2,dt,j,Nx,b,q)
+
+        ### BUG ### Making a bug for exercise 3,1,4
+        if bug=='bug5':
+            for j in range(1,Ny-1):
+                #use current timestep to find the boundary instead
+                #of useing previous time step.
+                u[0,j],u[Nx-1,j]=step1_neuman_x(u,x,y,t,f,V,C1,C2,dt,j,Nx,b,q)
+            
+        #fixing u_1 and u_2 for next timestep.
+        for i in range(Nx):
             for j in range(Ny):                
                 u_2[i,j]=u_1[i,j]
                 u_1[i,j]=u[i,j]
+
+
+
+    if mode == 'vector':
+        u=vec.step1(u,u_1,x,y,t,f,V,C1,C2,Nx,Ny,dt,b,q)
     
     for n in range(1,Nt):
         
         #finding u for t=dt*(n+1) at inner points
         for i in range(1,Nx-1):
             for j in range(1,Ny-1):
-                u[i,j] = step(u_1,u_2,x,y,t,f,C1,C2,dt,i,j,n,b,q)
+                u[i,j] = step(u_1,u_2,xv,yv,t,f,C1,C2,dt,i,j,n,b,q)
         
         #fixing edgy boundary points with Neumann
         u[0,0] = u[1,1]
@@ -85,13 +124,13 @@ def solver(I,V,f,q,b,Lx,Ly,dt,T,C):
         u[Nx-1,Ny-1] = u[Nx-2,Ny-2]
         
         #half of boundary with Neumann
-        for i in range(1,Nx-1):
+        for i in range(1,Nx-1):           
             u[i,0],u[i,Ny-1]=step_neuman_y(u_1,u_2,x,y,t,f,C1,C2,dt,i,n,Ny,b,q)
-        
-        #other half of boundary with Neumann
-        for j in range(1,Ny-1):
-            u[0,j],u[Nx-1,j]=step_neuman_x(u_1,u_2,x,y,t,f,C1,C2,dt,j,n,Nx,b,q)
             
+        #other half of boundary with Neumann
+        for j in range(1,Ny-1):           
+            u[0,j],u[Nx-1,j]=step_neuman_x(u_1,u_2,x,y,t,f,C1,C2,dt,j,n,Nx,b,q)
+           
 
         #fixing u_1 and u_2 for next timestep.
         for i in range(Nx):
@@ -101,7 +140,7 @@ def solver(I,V,f,q,b,Lx,Ly,dt,T,C):
 
 
 
-    return u
+    return u,x,y,t
 
 
 
@@ -117,14 +156,14 @@ def step1(u_1,x,y,t,f,V,C1,C2,dt,i,j,b,q):
     
     qx1 = 0.5*(q(x[i],y[j]) + q(x[i+1],y[j]))  
     qx2 = 0.5*(q(x[i],y[j]) + q(x[i-1],y[j]))
-
+    
     B = 0.5*C1*(qx1*(u_1[i+1,j] - u_1[i,j]) - qx2*(u_1[i,j] - u_1[i-1,j])) 
 
     qy1 = 0.5*(q(x[i],y[j]) + q(x[i],y[j+1]))  
     qy2 = 0.5*(q(x[i],y[j]) + q(x[i],y[j-1]))
     
     D = 0.5*C2*(qy1*(u_1[i,j+1] - u_1[i,j]) - qy2*(u_1[i,j] - u_1[i,j-1]))
-
+    
     return (A + B + D)/( 1 + 0.5*b*dt ) 
 
 def step1_neuman_y(u_1,x,y,t,f,V,C1,C2,dt,i,N,b,q):
@@ -162,7 +201,6 @@ def step1_neuman_x(u_1,x,y,t,f,V,C1,C2,dt,j,N,b,q):
 
     D1 = 0.5*C2*(q11*(u_1[0,j+1] - u_1[0,j]) - q12*(u_1[0,j] - u_1[0,j-1]))
     D2 = 0.5*C2*(q21*(u_1[N-1,j+1] - u_1[N-1,j])-q22*(u_1[N-1,j]-u_1[N-1,j-1]))
-
     return (A1+B1+D1)/( 1 + 0.5*b*dt ), (A2+B2+D2)/( 1 + 0.5*b*dt )
 
 def step(u_1,u_2,x,y,t,f,C1,C2,dt,i,j,n,b,q):
@@ -223,7 +261,9 @@ def step_neuman_x(u_1,u_2,x,y,t,f,C1,C2,dt,j,n,N,b,q):
 if __name__ == "__main__":
     
     I = lambda x,y: x+y
-    V = lambda x,y: x
+    V = lambda x,y: x +0*y
     f = lambda x,y,t: 0
     q = lambda x,y: 1
     print solver(I,V,f,q,0,1,1,0.2,1,1)
+    
+
