@@ -1,29 +1,32 @@
-import numpy as np
 import vectorization as vec 
+from scitools.std import linspace, newaxis,zeros,amax
 
-def solver(I,V,f,q,b,Lx,Ly,dt,T,C,mode='scalar',bug=None):
+def solver(I,V,f,q,b,Lx,Ly,dt,T,C,mode='scalar',bug=None,ue=None):
     
     Nt = int(round(T/dt))
-    t = np.linspace(0, Nt*dt, Nt+1)
+    t = linspace(0, Nt*dt, Nt+1)
+    dt = t[1]-t[0]
 
     dx = dt/C 
     Nx = int(round(Lx/dx))
-    x = np.linspace(0, Nx*dx, Nx+1)
-    xv = x[:np.newaxis]
+    x = linspace(0, Nx*dx, Nx+1)
+    dx=x[1]-x[0]
+    xv = x[:,newaxis]
     
     dy = dt/C 
     Ny = int(round(Ly/dy))
-    y = np.linspace(0, Ny*dx, Ny+1)
-    yv = y[np.newaxis:]
+    y = linspace(0, Ny*dx, Ny+1)
+    dy=y[1]-y[0]
+    yv = y[newaxis,:]
 
-    C1 = (dt/dx)**2
-    C2 = (dt/dy)**2
+    C1 = (C)**2
+    C2 = (C)**2
     
     
 
-    u = np.zeros(shape=(Nx,Ny))
-    u_1 = np.zeros(shape=(Nx,Ny))
-    u_2 = np.zeros(shape=(Nx,Ny))
+    u = zeros(shape=(Nx+1,Ny+1))
+    u_1 = zeros(shape=(Nx+1,Ny+1))
+    u_2 = zeros(shape=(Nx+1,Ny+1))
 
     #handeling zero sorce term and initial condition
     if f is None or f == 0 :
@@ -36,25 +39,28 @@ def solver(I,V,f,q,b,Lx,Ly,dt,T,C,mode='scalar',bug=None):
     
       
     if mode=='scalar':
+        
+        
         #The first initial condition
-        for i in range(Nx):
-            for j in range(Ny):
+        
+        for i in range(Nx+1):
+            for j in range(Ny+1):
                 u_1[i,j]=I(dx*i,dy*j)
         
-                
+        
         ### BUG ### Making a bug for exercise 3,1,4
         if bug=='bug1':
-            u_1 = np.zeros(shape=(Nx,Ny))
-            for i in range(1,Nx):
-                for j in range(1,Ny):
+            u_1 = zeros(shape=(Nx+1,Ny+1))
+            for i in range(1,Nx+1):
+                for j in range(1,Ny+1):
                     u_1[i,j]=I(dx*i,dy*j)
         
         
         #The second initial condiyion at inner points
-        for i in range(1,Nx-1):
-            for j in range(1,Ny-1):
+        for i in range(1,Nx):
+            for j in range(1,Ny):
                 u[i,j] = step1(u_1,x,y,t,f,V,C1,C2,dt,i,j,b,q)
-
+        
         ### BUG ### Making a bug for exercise 3,1,4
         if bug=='bug2':
             from constructed_bugs import bug_2
@@ -65,82 +71,112 @@ def solver(I,V,f,q,b,Lx,Ly,dt,T,C,mode='scalar',bug=None):
         ### BUG ### Making a bug for exercise 3,1,4
         if bug=='bug3':
             from constructed_bugs import bug_3
-            for i in range(1,Nx-1):
-                for j in range(1,Ny-1):
+            for i in range(1,Nx):
+                for j in range(1,Ny):
                     u[i,j] = bug_3(u_1,x,y,t,f,V,C1,C2,dt,i,j,b,q)
 
         ### BUG ### Making a bug for exercise 3,1,4
         if bug=='bug4':
             from constructed_bugs import bug_4
-            for i in range(1,Nx-1):
-                for j in range(1,Ny-1):
+            for i in range(1,Nx):
+                for j in range(1,Ny):
                     u[i,j] = bug_4(u_1,x,y,t,f,V,C1,C2,dt,i,j,b,q)
 
         #Neumann condition at the bouandary
         u[0,0] = u_1[1,1]
-        u[0,Ny-1] =u_1[1,Ny-2]
-        u[Nx-1,0] = u_1[Nx-2,1]
-        u[Nx-1,Ny-1] = u_1[Nx-2,Ny-2]
-    
+        u[0,Ny] =u_1[1,Ny-1]
+        u[Nx,0] = u_1[Nx-1,1]
+        u[Nx,Ny] = u_1[Nx-1,Ny-1]
+        
         #Neumann for the half the bouandary
-        for i in range(1,Nx-1):
+        for i in range(1,Nx):
            
-            u[i,0],u[i,Ny-1] = step1_neuman_y(u_1,x,y,t,f,V,C1,C2,dt,i,Ny,b,q)
-            
+            u[i,0],u[i,Ny] = step1_neuman_y(u_1,x,y,t,f,V,C1,C2,dt,i,Ny+1,b,q)
+        
         #Neumann for the other half of the bouandary 
-        for j in range(1,Ny-1):
+        for j in range(1,Ny):
             
-            u[0,j],u[Nx-1,j] = step1_neuman_x(u_1,x,y,t,f,V,C1,C2,dt,j,Nx,b,q)
-
+            u[0,j],u[Nx,j] = step1_neuman_x(u_1,x,y,t,f,V,C1,C2,dt,j,Nx+1,b,q)
+        
         ### BUG ### Making a bug for exercise 3,1,4
         if bug=='bug5':
-            for j in range(1,Ny-1):
+            for j in range(1,Ny):
                 #use current timestep to find the boundary instead
                 #of useing previous time step.
-                u[0,j],u[Nx-1,j]=step1_neuman_x(u,x,y,t,f,V,C1,C2,dt,j,Nx,b,q)
-            
+                u[0,j],u[Nx,j]=step1_neuman_x(u,x,y,t,f,V,C1,C2,dt,j,Nx+1,b,q)
+                
+        
+        print u  
+        print 0
+                
         #fixing u_1 and u_2 for next timestep.
-        for i in range(Nx):
-            for j in range(Ny):                
+        for i in range(Nx+1):
+            for j in range(Ny+1):                
                 u_2[i,j]=u_1[i,j]
                 u_1[i,j]=u[i,j]
 
 
 
     if mode == 'vector':
-        u=vec.step1(u,u_1,x,y,t,f,V,C1,C2,Nx,Ny,dt,b,q)
-    
+        u_1[:,:]=I(xv[:],yv[:])
+        #print u_1
+        error=0
+        u=vec.step1(u,u_1,xv,yv,t,f,V,C1,C2,Nx,Ny,dt,b,q)
+        if ue!=None:
+            err=amax(abs(u-ue(xv[:],yv[:],t[1])))
+            if err>error:
+                error =err
+        
+        u_2[:,:]=u_1[:,:]
+        u_1[:,:]=u[:,:]
+        #print u
+        #print 0
+        for n in range(1,Nt):
+            u=vec.step(u,u_1,u_2,xv,yv,t,f,C1,C2,Nx,Ny,dt,b,q,n)
+            u_2[:,:]=u_1[:,:]
+            u_1[:,:]=u[:,:]
+            #print u
+            #print t[n]
+
+            if ue!=None:
+                err=amax(abs(u-ue(xv[:],yv[:],t[n+1])))
+                if err>error:
+                    error =err
+        return u,xv,yv,t,error
+
+
     for n in range(1,Nt):
         
         #finding u for t=dt*(n+1) at inner points
-        for i in range(1,Nx-1):
-            for j in range(1,Ny-1):
-                u[i,j] = step(u_1,u_2,xv,yv,t,f,C1,C2,dt,i,j,n,b,q)
+        for i in range(1,Nx):
+            for j in range(1,Ny):
+                u[i,j] = step(u_1,u_2,x,y,t,f,C1,C2,dt,i,j,n,b,q)
         
         #fixing edgy boundary points with Neumann
-        u[0,0] = u[1,1]
-        u[0,Ny-1] = u[1,Ny-2]
-        u[Nx-1,0] = u[Nx-2,1]
-        u[Nx-1,Ny-1] = u[Nx-2,Ny-2]
+        u[0,0] = u_1[1,1]
+        u[0,Ny] = u_1[1,Ny-1]
+        u[Nx,0] = u_1[Nx-1,1]
+        u[Nx,Ny] = u_1[Nx-1,Ny-1]
         
         #half of boundary with Neumann
-        for i in range(1,Nx-1):           
-            u[i,0],u[i,Ny-1]=step_neuman_y(u_1,u_2,x,y,t,f,C1,C2,dt,i,n,Ny,b,q)
+        for i in range(1,Nx):           
+            u[i,0],u[i,Ny]=step_neuman_y(u_1,u_2,x,y,t,f,C1,C2,dt,i,n,Ny+1,b,q)
             
         #other half of boundary with Neumann
-        for j in range(1,Ny-1):           
-            u[0,j],u[Nx-1,j]=step_neuman_x(u_1,u_2,x,y,t,f,C1,C2,dt,j,n,Nx,b,q)
+        for j in range(1,Ny):           
+            u[0,j],u[Nx,j]=step_neuman_x(u_1,u_2,x,y,t,f,C1,C2,dt,j,n,Nx+1,b,q)
            
 
         #fixing u_1 and u_2 for next timestep.
-        for i in range(Nx):
-            for j in range(Ny):                
+        for i in range(Nx+1):
+            for j in range(Ny+1):                
                 u_2[i,j]=u_1[i,j]
                 u_1[i,j]=u[i,j]
 
 
-
-    return u,x,y,t
+        #print u
+        #print t[n]
+    return u,xv,yv,t
 
 
 
@@ -158,7 +194,7 @@ def step1(u_1,x,y,t,f,V,C1,C2,dt,i,j,b,q):
     qx2 = 0.5*(q(x[i],y[j]) + q(x[i-1],y[j]))
     
     B = 0.5*C1*(qx1*(u_1[i+1,j] - u_1[i,j]) - qx2*(u_1[i,j] - u_1[i-1,j])) 
-
+    
     qy1 = 0.5*(q(x[i],y[j]) + q(x[i],y[j+1]))  
     qy2 = 0.5*(q(x[i],y[j]) + q(x[i],y[j-1]))
     
@@ -264,6 +300,25 @@ if __name__ == "__main__":
     V = lambda x,y: x +0*y
     f = lambda x,y,t: 0
     q = lambda x,y: 1
-    print solver(I,V,f,q,0,1,1,0.2,1,1)
-    
 
+    b=0
+    Lx=1
+    Ly=1
+    dt=0.2
+    T=1
+    C=1
+
+    mode='scalar'
+    u,x,y,t=solver(I,V,f,q,b,Lx,Ly,dt,T,C,mode)
+    print u
+    print 
+
+
+    mode='vector'
+    u,x,y,t,error=solver(I,V,f,q,b,Lx,Ly,dt,T,C,mode)
+    print u
+    print 
+
+"""
+solver(I,V,f,q,b,Lx,Ly,dt,T,C,mode='scalar',bug=None)
+"""
