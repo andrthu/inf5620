@@ -1,0 +1,238 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+\begin{document}
+\begin{center}
+\LARGE MAT4500 - Mandatory assignment 
+\\
+Andreas Thune
+\\
+\LARGE
+01.10.2015
+
+\end{center}
+\Large \textbf{Exercise 1} \Large
+\\
+\\
+\textbf{a)} Let $D^n$,$S^n$,$S_U^n$,$S_L^n$,$f_L:D^n \rightarrow S_L^n$ and $f_U:D^n \rightarrow S_U^n$ be as defined in exercise. Want to prove that $f_L$ and $f_U$ are homomorphisms. $D^n$ is a closed and bounded subset of a metric space and is therefore compact. By the same argument we see that $S_U^n$ and $S_L^n$ are Hausdorff spaces. Theorem 26.6 tells us that $f_L$ and $f_U$ are homomorphisms if they are bijective and continuous.
+\\
+\\
+\textbf{(1)} $f_L$ and $f_U$ injective:
+\\
+Let $x,y \in D^n$ with $x\neq y$ $\Rightarrow \ \exists \ i \in \{1,...,n\}$ such that $ x_i\neq y_i$. This means that: $$f_L(x)_i=x_i\neq y_i=f_L(y)_i \ \Rightarrow f_L(x)\neq f_L(y)$$ and $$f_U(x)_i=x_i\neq y_i=f_U(y)_i \ \Rightarrow f_U(x)\neq f_U(y)$$
+\\
+\\
+\textbf{(2)} $f_L$ and $f_U$ surjective:
+\\
+Let $x \in S_U^n$ and $y \in S_L$ with $x=(x_1,..,x_{n+1})$ and \\ $y=(y_1,..,y_{n+1})$. Set $\bar{x}=(x_1,..,x_n)$ and $\bar{y}=(y_1,..,y_n)$. We clearly see that $\bar{x},\bar{y} \in \mathbb{R}^n $, but need to show that \\ $||\bar{x}||,||\bar{y}||\leq1$. However this is obvious, since \\ $||\bar{x}||\leq ||x||=1 $ and $||\bar{y}||\leq ||y||=1 $. 
+\\
+\\
+Now we need to show that $f_U(\bar{x})=x$ and $f_L(\bar{y})=y$. It suffices to prove $x_{n+1}=\sqrt{1-||\bar{x}||^2}$ and  $y_{n+1}=-\sqrt{1-||\bar{y}||^2}$: $$||x||=1 \Rightarrow   \sum_{i=1}^{n+1}x_i^2 = 1 \Rightarrow x_{n+1}^2=1-\sum_{i=1}^{n}x_i^2 \Rightarrow |x_{n+1}|=\sqrt{1-||\bar{x}||^2}$$ and $$||y||=1 \Rightarrow   \sum_{i=1}^{n+1}y_i^2 = 1 \Rightarrow y_{n+1}^2=1-\sum_{i=1}^{n}y_i^2 \Rightarrow |y_{n+1}|=\sqrt{1-||\bar{y}||^2}$$ Since $x \in S_U^n$ we know that $x_{n+1}\geq0$, $  x_{n+1}=\sqrt{1-||\bar{x}||^2}$, and since $y \in S_L^n$ $y_{n+1}\leq0$, $  y_{n+1}=-\sqrt{1-||\bar{y}||^2}$. 
+\\
+\\
+We then know that $\forall \ x \in S_U^n \ \exists \ \bar{x} \in D^n \ s.t. \ f_U(\bar{x})=x$, and that  $\forall \ y \in S_L^n \ \exists \ \bar{y} \in D^n \ s.t. \ f_L(\bar{y})=y$. This means that  $f_L$ and $f_U$ surjective.
+\\
+\\
+\textbf{(3)} $f_L$ and $f_U$ continuous:
+\\
+Both $f_L$ and $f_U$ are vector functions, i.e. they are on the form $[F_1(x),..,F_{n+1}(x)]$. We know from calculus, that these types of functions are continuous if each component is continuous. We also know that $x \mapsto x_i$ and $x \mapsto \sqrt{1-||x||^2}$ are continuous. This means that $f_L$ and $f_U$ are continuous.
+\\
+\\
+(1)$\wedge$(2)$\wedge$(3) $\Rightarrow$ $f_L$ and $f_U$ are homomorphisms.
+\\
+\\
+\textbf{b)} Define $X=D^n \sqcup D^n =(D^n \times \{1\}) \cup (D^n \times \{2 \})$, and the function $f:X \rightarrow S^n$ by: 
+\begin{displaymath}
+   f((x,i)) = \left\{
+     \begin{array}{lr}
+       f_U(x) &  i = 1 \\
+       f_L(x) &  i = 2
+     \end{array}
+   \right.
+\end{displaymath} 
+Where $f_U$ and $f_L$ is as in a). Note that when you take the Cartesian product between a set $A$ and a singleton set $\{a\}$, $A \times \{a\}$ is homomorphic to $A$. This means that $D^n \times \{1\}$ and $D^n \times \{2\}$ are homomorphic to $D^n$. This again means that $f_U$ and $f_L$ are continuous functions when restricted to the two new sets. This again means that $f$ restricted to $D^n \times \{1\}$ and $D^n \times \{2\}$ is continuous. Since these two sets obviously are closed in $X$, and have empty intersection, the pasting lemma 18.3 implies that $f$ is continuous on the union of       $D^n \times \{1\}$ and $D^n \times \{2\}$. But this is $X$.
+\\
+\\
+Lets prove that $f$ is surjective. Given $y \in  S^n$, with \\ $y_{n+1}\leq0$, surjectivety of $f_L$ implies that $\exists \ x \in D^n$ such that $$f_L(x)=y \ \Rightarrow f((x,2))=y$$ Repeat argument for lower part: $$y_{n+1}>0 \ \Rightarrow \ \exists \ x \in D^n \ s.t \ f_U(x)=y \Rightarrow f((x,1))=y$$
+Now assume $x\in D^n$ with $||x||=1$. $$f((x,1)) = f_U(x)=(x_1,...,x_n,\sqrt{1-||x||^2})=(x_1,...,x_n,0) $$ We also have: $$f((x,2)) = f_L(x)=(x_1,...,x_n,-\sqrt{1-||x||^2})=(x_1,...,x_n,0) $$ This means that $x^{(1)} \sim x^{(2)}$ in the meaning defined in the exercise. 
+\\
+\\
+\textbf{c)} Since $x^{(1)} \sim x^{(2)}$, it is obvious that $D^n \sqcup D^n / \sim $ is equal to $X^*=\{ f^{-1}(\{y\}) : y\in S^n \} $ equipped with the quotient topology. Then by Corollary 22.3 in the book, $\exists$ an induced homomorphism $\bar{f}:X^* \rightarrow S^n$ if and only if $f$ is quotient map. We already know that $f$ is continuous and surjective, therefore we only need to prove that $f^{-1}(U)$ open in X $\iff$ $U$ open in $S^n$.
+\\
+\\
+Instead of proving the openness statement I look at the equivalent statement with $U$ being closed. Assume $U$ closed in $S^n$. $f$ continuous implies that $f^{-1}(U)$ is closed.
+\\
+\\
+Conversely assume $f^{-1}(U)$ closed in $X=D^n \sqcup D^n$. I now claim without proof that $X$ is compact. This means that $f^{-1}(U)$ is compact. Since $f$ is continuous $f(f^{-1}(U))$ is compact in $S^n$, and since $S^n$ is Hausdorff $f(f^{-1}(U))$ is closed. Want to show that $f(f^{-1}(U))=U$. $$y\in U \ \Rightarrow \ \exists \ x \in X : f(x)=y \ \Rightarrow \ y=f(x) \in f(f^{-1}(U)) $$ This means that $U \subset f(f^{-1}(U)) $. Conversely: $$y\in f(f^{-1}(U)) \ \Rightarrow \ \exists \ x \in f^{-1}(U):y=f(x) \ \Rightarrow \ y \in U $$ This means $f(f^{-1}(U)) \subset U \ \Rightarrow f(f^{-1}(U))=U $. Since $f(f^{-1}(U))$ is closed so is U. 
+\\
+\\
+I have now proved that $f$ is quotient map, and as I explained above the statement in the exercise follows from this. 
+\\
+\\
+\Large \textbf{Exercise 2} \Large
+\\
+\\
+\textbf{a)} Let $(X,d)$ be a metric space, and let $K \subset X$ be compact. Since all metric spaces are Hausdorff spaces, and all compact subsets of Hausdorff spaces are closed, $K$ is closed.
+\\
+\\
+Now let $x \in K$, and let $\{B(x,n)\}_{n \in \mathbb{N}}$ be family of open balls centred in $x$, with radius $n \in \mathbb{N}$. It is obvious that $X=\bigcup\limits_{n=1}^{\infty} B(x,n)$, and that $\bigcup\limits_{n=1}^{\infty} B(x,n)$ is an open cover of $K$. Since $K$ is compact we know that $\exists \{n_1,...,n_r\} \subset \mathbb{N}$ such that $\bigcup\limits_{i=1}^{r} B(x,n_i)$ covers $K$. Let $N=max\{n_1,...,n_r\}$. Then we know that $K \subset B(x,N)$. This means that $K$ is bounded. 
+\\
+\\
+\textbf{b)} Let $X=\mathbb{N}$, and define metric 
+\begin{displaymath}
+   d(x,y) = \left\{
+     \begin{array}{lr}
+       0 &  x=y \\
+       1 &  x \neq y
+     \end{array}
+   \right.
+\end{displaymath} 
+The requirements:
+\\
+\\
+(i) $\forall x,y \in X \ d(x,y)\geq 0 \wedge d(x,y)=0 \iff x=y$ 
+\\
+(ii) $\forall x,y \in X \ d(x,y)=d(y,x)$
+\\
+\\
+for $(X,d)$ to be a metric space, are trivially satisfied. The last requirement:
+\\
+(iii) $\forall x,y,z \in X \ d(x,y)\leq d(x,z) + d(z,y)$
+\\
+\\
+we can also show holds, if we separate the cases $x=y$ and $x \neq y$: First assume $x=y$:
+
+\begin{displaymath}
+   d(x,y) =0 \leq d(x,z) + d(z,y)=\left\{
+     \begin{array}{lr}
+       0 &  z=x,y \\
+       2 &  z \neq x,y
+     \end{array}
+   \right.
+\end{displaymath} 
+And for $x\neq y$:
+
+\begin{displaymath}
+   d(x,y) = 1 \leq d(x,z) + d(z,y)=\left\{
+     \begin{array}{lr}
+       1 &  z=x \vee z=y \\
+       2 &  z \neq x,y
+     \end{array}
+   \right.
+\end{displaymath}
+(i),(ii) and (iii) $\Rightarrow (X,d)$ is a metric space. Now notice that $X=\mathbb{N}$ is closed by definition, and that $X$ is bounded since $\forall x \in X \ X \subset B(x,2)$, where $B(x,2)$ is the open ball centred in $x$ with radius $2$.
+\\
+\\
+Now I want to find an open cover of $X$ that does not contain a finite subcover. I claim that all points $x \in X$ are open in $X$. We see this by noticing that the open ball $B(x,\frac{1}{2})$ only contain $x$ itself. Finaly we conclude that $A=\bigcup\limits_{n=1}^{\infty} \{n\}$ is a disjoint open cover of $X$, and that there therefore exists no finite subcover of $A$ that covers $X$. This means that $X$ is not compact.  
+\\
+\\
+\Large \textbf{Exercise 3} \Large
+\\
+\\
+\textbf{a)} Let $f:\mathbb{R}^n \rightarrow \mathbb{R}$ be a real polynomial. This means that $f$ is continuous. Since $\mathbb{R}$ is a Hausdorff space, the singleton set $\{0\}$ is closed in $\mathbb{R}$. This means that $A=f^{-1}(\{0\})\subset \mathbb{R}^n$ the set in $\mathbb{R}^n$ of solutions to $f=0$ is closed, since closedness is preserved through the inverse image of continuous functions.  
+\\
+\\
+\textbf{b)} We have the set $SL(2,\mathbb{R}) \subset \mathbb{R}^4$ defined as follows:
+$$ SL(2,\mathbb{R})= \{A=\begin{bmatrix}
+    x_{1} & x_{2} \\
+    x_{3} & x_{4} \\
+    
+\end{bmatrix} | det(A)=x_1x_4-x_2x_3=1 \}$$
+We see that all $A \in SL(2,\mathbb{R})$ can be represented by a vector in $ \mathbb{R}^4$:
+\[
+A=\begin{bmatrix}
+    x_{1} & x_{2} \\
+    x_{3} & x_{4} \\
+    
+\end{bmatrix} = (x_1,x_2,x_3,x_4)^T \in \mathbb{R}^4
+\]
+Now define a polynomilal $f:\mathbb{R}^4 \rightarrow \mathbb{R}$ by $$ f(x_1,x_2,x_3,x_4)=x_1x_4-x_2x_3-1$$
+See that $ SL(2,\mathbb{R})=f^{-1}(\{ 0 \})$. The previous exercise then tells us that $ SL(2,\mathbb{R})$ is closed.
+\\
+\\
+\textbf{c)} Want to show that $SL(2,\mathbb{R})$ is not compact. Since $\mathbb{R}^4$ is a metric space, it suffices to show that $SL(2,\mathbb{R})$ is not bounded. 
+\\
+\\To see that $SL(2,\mathbb{R})$ is not bounded, notice that $\forall x \in \mathbb{R}$ the matrix
+\[
+A_x=\begin{bmatrix}
+    1 & 0 \\
+    x & 1 \\
+    
+\end{bmatrix} \in SL(2,\mathbb{R})
+\]
+since $det(A) = 1$. We can then say that the  sequence $\{ A_n \}_{n=1}^{\infty}$ is contained in $SL(2,\mathbb{R})$. If we take the euclidean vector norm of $A_n$ we get $||A_n|| = \sqrt{2+n^2}$, which means that $\{ ||A_n|| \}_{n=1}^{\infty}$ is an unbounded sequence in $\mathbb{R}$. This means that there does not exists a number $M \in \mathbb{R}$ that bound the norms of elememts in $SL(2,\mathbb{R}) $, and $SL(2,\mathbb{R})$ can therefore not be bounded.
+\\
+\\
+\Large \textbf{Exercise 4} \Large
+\\
+\\
+\textbf{a)} Want to show that the relation $\sim$ defined by : $$x,y \in X \ x\sim y  \iff \exists \ \alpha:[0,1]\rightarrow X, \alpha \ continious \ \wedge \alpha(0)=x \  \wedge \alpha(1)=y$$
+Is an equivalence relation on $X$.
+\\
+\\
+(1): $x\sim x$ since the constant function $\alpha:[0,1]\rightarrow X$ given by $\alpha(r)=x$ is continuous, and obviously $\alpha(0)=\alpha(1)=x$
+\\
+\\
+(2): Assume $x \sim y$. $\Rightarrow \exists \ \alpha:[0,1]\rightarrow X$ such that $\alpha(0)=x$ and $\alpha(1)=y$. Now define the function $f:[0,1]\rightarrow[0,1]$ by $f(t)=1-t$. $f$ is a polynomial, and is therefore continuous. 
+\\
+\\
+Now let $\beta:[0,1]\rightarrow X$ be the composition $\beta = \alpha \circ f$. Since $\beta$ is a composition of continuous functions, $\beta$ is continuous. Observe that $\beta(0)=\alpha(f(0))=\alpha(1)=y$ and that$\beta(1)=\alpha(f(1))=\alpha(0)=x$. This means that $y \sim x$.
+\\
+\\
+(3): Assume $x \sim y$ and $y \sim z$. Then $ \exists \ \alpha,\beta:[0,1]\rightarrow X$ such that $\alpha,\beta$ continuous, $\alpha(0)=x$, $\alpha(1)=\beta(0)=y$ and $\beta(1)=z$. 
+\\
+\\
+Now define $f:[0,\frac{1}{2}]\rightarrow[0,1]$ and $g:[\frac{1}{2},1]\rightarrow[0,1]$ by $f(t)=2t$ and $g(t)= 2t-1$. Both $g$ and $f$ are continuous. Next let us define $\omega:[0,1]\rightarrow X$ by:
+\begin{displaymath}
+   \omega(t) = \left\{
+     \begin{array}{lr}
+       \alpha(f(t)) &  t \in [0,\frac{1}{2}) \\
+       \beta(g(t)) &  t \in [\frac{1}{2},1]
+     \end{array}
+   \right.
+\end{displaymath} 
+Notice that $\omega(0)=\alpha(0)=x$ and that $\omega(1)=\beta(1)=z$. We also see that $\forall t \neq \frac{1}{2}$ $\omega$ is continuous, by the same argument as in (2). Since $[0,1]$ a metric space, showing continuity at $t=\frac{1}{2}$ is the same as showing: $$\{ t_n \}_{n=1}^{\infty} \rightarrow \frac{1}{2} \Rightarrow \{ \omega(t_n) \}_{n=1}^{\infty} \rightarrow y$$
+I claim without proof that it is enough to show: $$\lim_{t\rightarrow \frac{1}{2}^-} \omega(t)=\lim_{t\rightarrow \frac{1}{2}^+}\omega(t)$$
+$\lim_{t\rightarrow \frac{1}{2}^-} \omega(t) = \lim_{t\rightarrow \frac{1}{2}^-} \alpha(f(t))=\alpha(1)=y$ and 
+\\
+$\lim_{t\rightarrow \frac{1}{2}^+} \omega(t) = \lim_{t\rightarrow \frac{1}{2}^+} \beta(g(t))=\beta(0)=y$, by continuity of $\alpha,\beta,f,g$. Finally we can conclude that $\omega$ is continuous, which means that $x \sim z$.
+\\
+\\
+(1)$\wedge$(2)$\wedge$(3) $\Rightarrow \ \sim $ is an equivalence relation on $X$.
+\\
+\\
+\textbf{b)} Assume $x,y \in \mathbb{R}^n$, $x=(x_1,...,x_n)$ and $y=(y_1,...,y_n)$. Then define $\alpha:[0,1]\rightarrow \mathbb{R}^n$ by $$\alpha(t)=x+(y-x)t=(x_1+(y_1-x_1)t,x_2+(y_2-x_2)t,...,x_n+(y_n-x_n)t)$$
+Since $\alpha$ is a linear polynomial in all components, it is continuous in all components and therefore continuous. We also see that $\alpha(0)=x$ and $\alpha(1)=y$. this means that $x \sim y$. We showed this for general $x,y$, which means that $\forall x,y \in \mathbb{R}^n x \sim y$. This implies that the equivalence class $[x]$ is equal to $\mathbb{R}^n \ \forall x \in \mathbb{R}^n$. 
+\\
+\\
+We have now shown that $(\pi_0(\mathbb{R}^n)= \{\mathbb{R}^n\}) \ \Rightarrow |\pi_0(\mathbb{R}^n)|=1$. 
+\\
+\\
+\textbf{c)} Let $x,y \in \mathbb{R} \setminus \{0\}$, and assume $x,y<0$. Then $\alpha(t)=x+(y-x)t$ satisfies the conditions for $x \sim y$. The same argument work for $x,y>0$. This means that \\$\forall x,y \in (-\infty,0) \ x \sim y$ and $\forall x,y \in (0,\infty) \ x \sim y$.
+\\
+\\
+Want to show that for $x<0$ and $y>0$ $x$ and $y$ are not equivalent in our relation $\sim$. Assume for contradiction that $x\sim y \ \Rightarrow \ \exists \ \alpha:[0,1]\rightarrow \mathbb{R} \setminus \{0\}$ such that $\alpha$ continuous, $\alpha(0)=x$ and  $\alpha(1)=y$. However, since $\alpha$ is continuous, $[0,1]$ is connected and $\mathbb{R} \setminus \{0\}$ is unconnected, the image $\alpha([0,1])$ is either entirely contained in $(-\infty,0)$ or in $(0,\infty)$. This is a contradiction because $\alpha(0) \in (-\infty,0)$ and $\alpha(1) \in (0,\infty)$. This means $x \sim y$ is not true. This means that $\pi_0(\mathbb{R} \setminus \{0\})=\{(-\infty,0),(0,\infty)\} \Rightarrow |\pi_0(\mathbb{R} \setminus \{0\})|=2$.
+\\
+\\
+\textbf{d)} Let $z \in \mathbb{R}^n$ and $x,y \in \mathbb{R}^n \setminus \{ z \}$. Define $\alpha:[0,1]\rightarrow \mathbb{R}^n$ as in b. There are now two cases:
+\\
+\\
+(I): $z \notin \alpha([0,1]) \ \Rightarrow x \sim y$ 
+\\
+(II): $z \in \alpha([0,1])$ 
+\\
+\\
+Lets look at case (II). Define $$L= \{x_0 \in \mathbb{R}^n \ | \ \exists t \in \mathbb{R} \ \text{s.t.} \ x_0=x+t(y-x) \}$$ as the line in $\mathbb{R}^n$ that contains $\alpha([0,1])$. This means that $z$ also is contained in $L$. Now choose any point $a \in \mathbb{R}^n \setminus L$. It is clear that the line segments between $x$ and $a$ and between $a$ and $y$ does not contain $z$. We can then construct continuous functions as we did in b, such that $x \sim a$ and $a \sim y$. Transitivity property of $\sim$ then gives us $x \sim y$. 
+\\
+\\
+This shows that $\forall x,y \in  \mathbb{R}^n \setminus \{ z \}$ we have $ x \sim y$ \\ $ \Rightarrow \pi_0(\mathbb{R}^n \setminus \{ z \})= \{\mathbb{R}^n \setminus \{ z \} \} \Rightarrow |\pi_0(\mathbb{R}^n \setminus \{ z \})|=1$ 
+\\
+\\
+\textbf{e)} Exercise 4b) and 4d) show that the sets $\{\mathbb{R}^n \}_{n=1}^{\infty}$ and $\{\mathbb{R}^n \setminus \{ z \}  \}_{n=2}^{\infty}$ are path connected. A result from the book tells us that path connectedness implies connectedness. This means that $\{\mathbb{R}^n \}_{n=1}^{\infty}$ and $\{\mathbb{R}^n \setminus \{ z \}  \}_{n=2}^{\infty}$ are connected. It is also trivial to show that $ \mathbb{R} \setminus \{0\}$ is not connected. Lets use this to show  $\mathbb{R}^n$ and $ \mathbb{R}$ are non-homomorphic.
+\\
+\\
+Assume for contradiction that $\mathbb{R}^n$ and $ \mathbb{R}$ are homomorphic. Then $\exists \ f:\mathbb{R}^n \rightarrow \mathbb{R}$ where f is a homomorphism. Now remove $\{ 0\}$ from $ \mathbb{R}$ and $z=f^{-1}(\{ 0\})$ from $ \mathbb{R}^n$. If we restrict $f$ to $\mathbb{R}^n \setminus \{ z \}$, $f$ should now be a homomorphism between $\mathbb{R}^n \setminus \{ z \}$ and $\mathbb{R} \setminus \{0\}$. However, $\mathbb{R}^n \setminus \{ z \}$ is connected while $\mathbb{R} \setminus \{0\}$ is not. This is a contradiction since $\mathbb{R} \setminus \{0\}$ is the image of $\mathbb{R}^n \setminus \{ z \}$ under $f$, and connectedness is preserved through the image of a continuous function. Therefore $\mathbb{R}^n$ and $ \mathbb{R}$ are non-homomorphic.       
+
+
+\end{document}

@@ -1,0 +1,423 @@
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2015.9.6)  17 OCT 2015 20:17
+entering extended mode
+ %&-line parsing enabled.
+**oblig1.tex
+(./oblig1.tex
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, farsi, arabic, croatian, bulgarian, ukrainian, russian, czech, slov
+ak, danish, dutch, finnish, french, basque, ngerman, german, german-x-2009-06-1
+9, ngerman-x-2009-06-19, ibycus, monogreek, greek, ancientgreek, hungarian, san
+skrit, italian, latin, latvian, lithuanian, mongolian2a, mongolian, bokmal, nyn
+orsk, romanian, irish, coptic, serbian, turkish, welsh, esperanto, uppersorbian
+, estonian, indonesian, interlingua, icelandic, kurmanji, slovenian, polish, po
+rtuguese, spanish, galician, catalan, swedish, ukenglish, pinyin, loaded.
+(/usr/share/texmf-texlive/tex/latex/base/report.cls
+Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texmf-texlive/tex/latex/base/size11.clo
+File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf-texlive/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
+\@emptytoks=\toks14
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
+)
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip43
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-texlive/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks15
+\ex@=\dimen103
+))
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen104
+)
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count88
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count89
+\leftroot@=\count90
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count91
+\DOTSCASE@=\count92
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen105
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count93
+\c@MaxMatrixCols=\count94
+\dotsspace@=\muskip10
+\c@parentequation=\count95
+\dspbrk@lvl=\count96
+\tag@help=\toks16
+\row@=\count97
+\column@=\count98
+\maxfields@=\count99
+\andhelp@=\toks17
+\eqnshift@=\dimen106
+\alignsep@=\dimen107
+\tagshift@=\dimen108
+\tagwidth@=\dimen109
+\totwidth@=\dimen110
+\lineht@=\dimen111
+\@envbody=\toks18
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks19
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+) (./oblig1.aux)
+\openout1 = `oblig1.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Try loading font information for U+msa on input line 18.
+
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 18.
+
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2009/06/22 v3.00 AMS symbols B
+)
+Underfull \hbox (badness 10000) in paragraph at lines 15--23
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--23
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--31
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--31
+
+ []
+
+
+Overfull \hbox (43.99992pt too wide) detected at line 31
+\OMS/cmsy/m/n/14.4 jj\OML/cmm/m/it/14.4 x\OMS/cmsy/m/n/14.4 jj \OT1/cmr/m/n/14.
+4 = 1 \OMS/cmsy/m/n/14.4 ) [] \OML/cmm/m/it/14.4 x[] \OT1/cmr/m/n/14.4 = 1 \OMS
+/cmsy/m/n/14.4 ) \OML/cmm/m/it/14.4 x[] \OT1/cmr/m/n/14.4 = 1 \OMS/cmsy/m/n/14.
+4 ^^@ [] \OML/cmm/m/it/14.4 x[] \OMS/cmsy/m/n/14.4 ) j\OML/cmm/m/it/14.4 x[]\OM
+S/cmsy/m/n/14.4 j \OT1/cmr/m/n/14.4 = []
+ []
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (39.2416pt too wide) detected at line 31
+\OMS/cmsy/m/n/14.4 jj\OML/cmm/m/it/14.4 y\OMS/cmsy/m/n/14.4 jj \OT1/cmr/m/n/14.
+4 = 1 \OMS/cmsy/m/n/14.4 ) [] \OML/cmm/m/it/14.4 y[] \OT1/cmr/m/n/14.4 = 1 \OMS
+/cmsy/m/n/14.4 ) \OML/cmm/m/it/14.4 y[] \OT1/cmr/m/n/14.4 = 1 \OMS/cmsy/m/n/14.
+4 ^^@ [] \OML/cmm/m/it/14.4 y[] \OMS/cmsy/m/n/14.4 ) j\OML/cmm/m/it/14.4 y[]\OM
+S/cmsy/m/n/14.4 j \OT1/cmr/m/n/14.4 = []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--46
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--46
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--46
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--46
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 53--57
+
+ []
+
+[2]
+Overfull \hbox (8.13187pt too wide) detected at line 58
+\OML/cmm/m/it/14.4 f\OT1/cmr/m/n/14.4 ((\OML/cmm/m/it/14.4 x; \OT1/cmr/m/n/14.4
+ 2)) = \OML/cmm/m/it/14.4 f[]\OT1/cmr/m/n/14.4 (\OML/cmm/m/it/14.4 x\OT1/cmr/m/
+n/14.4 ) = (\OML/cmm/m/it/14.4 x[]; :::; x[]; \OMS/cmsy/m/n/14.4 ^^@[]\OT1/cmr/
+m/n/14.4 ) = (\OML/cmm/m/it/14.4 x[]; :::; x[]; \OT1/cmr/m/n/14.4 0)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 58--67
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 58--67
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 58--67
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 67--83
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--83
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--83
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--83
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--83
+
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 90--105
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--105
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--105
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--137
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--137
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--137
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--137
+
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 150--157
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 150--157
+
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 163--170
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 163--170
+
+ []
+
+
+Overfull \hbox (84.40364pt too wide) detected at line 170
+\OML/cmm/m/it/14.4 x; y \OMS/cmsy/m/n/14.4 2 \OML/cmm/m/it/14.4 X x \OMS/cmsy/m
+/n/14.4 ^^X \OML/cmm/m/it/14.4 y  \OMS/cmsy/m/n/14.4 ([])  9 \OML/cmm/m/it/14.4
+  \OT1/cmr/m/n/14.4 : [0\OML/cmm/m/it/14.4 ; \OT1/cmr/m/n/14.4 1] \OMS/cmsy/m/
+n/14.4 ! \OML/cmm/m/it/14.4 X;  continious  \OMS/cmsy/m/n/14.4 ^ \OML/cmm/m/it
+/14.4 \OT1/cmr/m/n/14.4 (0) = \OML/cmm/m/it/14.4 x  \OMS/cmsy/m/n/14.4 ^ \OML/
+cmm/m/it/14.4 \OT1/cmr/m/n/14.4 (1) = \OML/cmm/m/it/14.4 y
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 170--187
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 170--187
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 170--187
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 170--187
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 170--187
+
+ []
+
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 196--205
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 196--205
+
+ []
+
+
+Overfull \hbox (42.23854pt too wide) detected at line 205
+\OML/cmm/m/it/14.4 \OT1/cmr/m/n/14.4 (\OML/cmm/m/it/14.4 t\OT1/cmr/m/n/14.4 ) 
+= \OML/cmm/m/it/14.4 x \OT1/cmr/m/n/14.4 + (\OML/cmm/m/it/14.4 y \OMS/cmsy/m/n/
+14.4 ^^@ \OML/cmm/m/it/14.4 x\OT1/cmr/m/n/14.4 )\OML/cmm/m/it/14.4 t \OT1/cmr/m
+/n/14.4 = (\OML/cmm/m/it/14.4 x[] \OT1/cmr/m/n/14.4 + (\OML/cmm/m/it/14.4 y[] \
+OMS/cmsy/m/n/14.4 ^^@ \OML/cmm/m/it/14.4 x[]\OT1/cmr/m/n/14.4 )\OML/cmm/m/it/14
+.4 t; x[] \OT1/cmr/m/n/14.4 + (\OML/cmm/m/it/14.4 y[] \OMS/cmsy/m/n/14.4 ^^@ \O
+ML/cmm/m/it/14.4 x[]\OT1/cmr/m/n/14.4 )\OML/cmm/m/it/14.4 t; :::; x[] \OT1/cmr/
+m/n/14.4 + (\OML/cmm/m/it/14.4 y[] \OMS/cmsy/m/n/14.4 ^^@ \OML/cmm/m/it/14.4 x[
+]\OT1/cmr/m/n/14.4 )\OML/cmm/m/it/14.4 t\OT1/cmr/m/n/14.4 )
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 205--226
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 205--226
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 205--226
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 205--226
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 205--226
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 205--226
+
+ []
+
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 226--236
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 226--236
+
+ []
+
+
+Overfull \hbox (4.34988pt too wide) in paragraph at lines 226--236
+\OT1/cmr/m/n/14.4 tells us that path con-nect-ed-ness im-plies con-nect-ed-ness
+. This
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 226--236
+
+ []
+
+[9] [10] (./oblig1.aux) ) 
+Here is how much of TeX's memory you used:
+ 904 strings out of 493848
+ 10117 string characters out of 1152824
+ 67576 words of memory out of 3000000
+ 4230 multiletter control sequences out of 15000+50000
+ 7145 words of font info for 28 fonts, out of 3000000 for 9000
+ 714 hyphenation exceptions out of 8191
+ 27i,8n,22p,785b,143s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/
+cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmex10.p
+fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/sh
+are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-t
+exlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts
+/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/publi
+c/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
+m/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/
+texmf-texlive/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on oblig1.pdf (10 pages, 146610 bytes).
+PDF statistics:
+ 79 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
