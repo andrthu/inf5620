@@ -1,6 +1,6 @@
 from numpy import *
 from wave_standing import *
-
+from matplotlib.pyplot import *
 def solver(I, V,f, q, L, dt, C, T, max_q,
            user_action=None,disc='type57'):
 
@@ -27,8 +27,8 @@ def solver(I, V,f, q, L, dt, C, T, max_q,
     
 
     # Load initial condition into u_1
-    for i in range(0,Nx+1):
-        u_1[i] = I(x[i])
+    
+    u_1[:] = I(x[:])
 
     if user_action is not None:
         user_action(u_1, x, t, 0)
@@ -88,83 +88,62 @@ def solver(I, V,f, q, L, dt, C, T, max_q,
     cpu_time = t0 - time.clock()
     return u, x, t, cpu_time
 
-def make_f(q,d_q,dd_q,L):
-    
-    omega = lambda x: sqrt(q(x))*pi/L
-    d_omega = lambda x: pi*d_q(x)/(2.*L*sqrt(q(x)))
-    dd_omega = lambda x: dd_q(x)*d_omega(x)-(pi*d_q(x)**2)/(4*L*sqrt(q(x))**3)
-    
-    ue = lambda x,t: cos(pi*x/L)*cos(t*omega(x))
-    help1_f = lambda x,t: sin(pi*x/L)*cos(t*omega(x))
-    help2_f = lambda x,t: cos(pi*x/L)*sin(t*omega(x))
-    help3_f = lambda x,t: sin(pi*x/L)*sin(t*omega(x))
 
-    u_tt = lambda x,t: -ue(x,t)*omega(x)**2
 
-    u_x = lambda x,t: -pi*help1_f(x,t)/L - t*d_omega(x)*help2_f(x,t)/L
-    u_xx1 = lambda x,t: -ue(x,t)*((pi/L)**2 + (t*d_omega(x))**2)
-    u_xx2 = lambda x,t: help3_f(x,t)*2*t*pi*d_omega(x)/L
-    u_xx3 = lambda x,t: -t*dd_omega(x)*help2_f(x,t)
-    u_xx = lambda x,t: u_xx1(x,t)+u_xx2(x,t)+u_xx3(x,t)
-    
-    return lambda x,t: u_tt(x,t) - d_q(x)*u_x(x,t)-q(x)*u_xx(x,t),ue
 
-def make_f2(q,d_q,dd_q,omega,d_omega,dd_omega,L):
-    
-    
-
-    ue = lambda x,t: cos(pi*x/L)*cos(t*omega(x))
-    help1_f = lambda x,t: sin(pi*x/L)*cos(t*omega(x))
-    help2_f = lambda x,t: cos(pi*x/L)*sin(t*omega(x))
-    help3_f = lambda x,t: sin(pi*x/L)*sin(t*omega(x))
-
-    u_tt = lambda x,t: -ue(x,t)*omega(x)**2
-
-    u_x = lambda x,t: -pi*help1_f(x,t)/L - t*d_omega(x)*help2_f(x,t)/L
-    u_xx1 = lambda x,t: -ue(x,t)*((pi/L)**2 + (t*d_omega(x))**2)
-    u_xx2 = lambda x,t: help3_f(x,t)*2*t*pi*d_omega(x)/L
-    u_xx3 = lambda x,t: -t*dd_omega(x)*help2_f(x,t)
-    u_xx = lambda x,t: u_xx1(x,t)+u_xx2(x,t)+u_xx3(x,t)
-    
-    return lambda x,t: u_tt(x,t) - d_q(x)*u_x(x,t)-q(x)*u_xx(x,t),ue
 
 
 if __name__ == "__main__":
     
     L=2
-    C=0.5
-    T=3
-    dt=0.01
+    C=0.9
+    T=1
+    dt=0.2
     I = lambda x: cos(pi*x/L)
     K=pi/L
     disc='type57'
-
+    """
     q = lambda x: 1+ (x-L/2.)**4
     d_q= lambda x: 4*(x-L/2.)**3
-    dd_q=lambda x: 12*(x-L/2.)**2
-    max_q = q(0)
-   
-    #f = lambda x,t: u_tt(x,t) - d_q(x)*u_x(x,t)-q(x)*u_xx(x,t)
-    f,ue=make_f(q,d_q,dd_q,L)
+    """
+    q = lambda x: 1 +  cos(K*x)
+    d_q = lambda x: -K*sin(K*x)
+    max_q = sqrt(q(0))
+    ue = lambda x,t: cos(K*x)*cos(t)
+    f=lambda x,t: -ue(x,t) + q(x)*K**2*ue(x,t) + d_q(x)*K*cos(t)*sin(K*x)  
+
+    kon_val=5
+    err = zeros(kon_val)
+    kon= zeros(kon_val-1)
+    for i in range(1,kon_val+1):
+        u, x, t, cpu_time = solver(I, None,f, q, L, dt*2**(-i), C, T, max_q,
+               user_action=None,disc='type54')
+
+        err[i-1]=amax(abs(u-ue(x,T)))
+        plot(x,abs(u-ue(x,T)))
+        hold('on')
+    show()
+    for i in range(kon_val-1):
+        kon[i]=log(err[i+1]/err[i])/log(0.5)
+    
+    print err, kon
+
     
     """
     viz(I,None,f, q,L,dt,C,T,ue,max_q,
-        -2,2,True,'matplotlib',solver,False,disc)
+        -2,2,False,'matplotlib',solver,False,disc)
     """
 
-    q = lambda x: cos(x*K)**2
+    q = lambda x: cos(x*K) +1
     d_q= lambda x: -2*K*cos(x*K)*sin(x*K)
     dd_q=lambda x: 2*(sin(K*x)**2-cos(K*x)**2)*K**2
-    max_q = 1
+    max_q = sqrt(2)
     
-    o = lambda x: K*cos(K*x)
-    d_o = lambda x: -sin(K*x)*K**2
-    dd_o = lambda x: -cos(K*x)*K**3
-    f,ue=make_f2(q,d_q,dd_q,o,d_o,dd_o,L)
-
+    
+    """
     viz(I,None,f, q,L,dt,C,T,ue,max_q,
         -2,2,True,'matplotlib',solver,False,disc)
-    
+    """
 """
     I, V, f, c, L, dt, C, T, ue, max_q,
     umin, umax,               
